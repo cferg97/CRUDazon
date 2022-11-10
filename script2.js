@@ -1,6 +1,16 @@
+const params = new URLSearchParams(window.location.search)
+const productID = params.get("_id")
+const endpoint = "https://striveschool-api.herokuapp.com/api/product/"
+const options = {
+    method: "POST",
+    body: JSON.stringify(newProduct),
+    headers: {
+    "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MzZjZjQyMmQ0YmUzZDAwMTU4NDVmZWYiLCJpYXQiOjE2NjgwODkxNDgsImV4cCI6MTY2OTI5ODc0OH0.jbcB-JH_ULcMckN37umnLHzOROT4h5H0Skxg1FakiI0",
+    "Content-Type": "application/json" }
+}
+
 async function onFormSubmit(event) {
     event.preventDefault()
-
     const newProduct = {
         name: document.getElementById("item-name").value,
         description: document.getElementById("description").value, 
@@ -8,7 +18,6 @@ async function onFormSubmit(event) {
         imageUrl: document.getElementById("image").value,
         price: document.getElementById("price").value
     }
-
     const options = {
         method: "POST",
         body: JSON.stringify(newProduct),
@@ -18,8 +27,6 @@ async function onFormSubmit(event) {
     }
 
     try {
-        const endpoint = "https://striveschool-api.herokuapp.com/api/product/"
-
         const response = await fetch(endpoint, options)
 
         if (response.ok) {

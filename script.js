@@ -24,6 +24,7 @@ function renderProducts(listOfProducts){
             <h5 class="card-title">${product.brand}</h5>
             <p class="card-text">${product.description}</p>
             <p class="card-text">£${product.price}</p>
+            <a href="details.html/product/${product._id}"><button class="btn btn-primary">See Details</button></a>
         </div>
     </div>`
     row.appendChild(productCard) 
