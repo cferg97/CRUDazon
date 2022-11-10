@@ -2,10 +2,15 @@ const params = new URLSearchParams(
     window.location.search
   )
   const productId = params.get('_id')
-
+  const endpoint = "https://striveschool-api.herokuapp.com/api/product/"
+  const options = {
+    method: "GET",
+    headers: {
+    "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MzZjZjQyMmQ0YmUzZDAwMTU4NDVmZWYiLCJpYXQiOjE2NjgwODkxNDgsImV4cCI6MTY2OTI5ODc0OH0.jbcB-JH_ULcMckN37umnLHzOROT4h5H0Skxg1FakiI0",}
+}
   async function getProduct() {
 
-    const response = await fetch(`https://striveschool-api.herokuapp.com/api/product/${productId}`)
+    const response = await fetch(`https://striveschool-api.herokuapp.com/api/product/${product._id}`, options)
     const product = await response.json()
     return product
   }
@@ -30,7 +35,7 @@ const params = new URLSearchParams(
 
   window.onload = async () => {
     const product = await getProduct()
-    renderProduct(product)
+    renderProducts(product)
   }
 
   async function onDelete() {
@@ -40,7 +45,7 @@ const params = new URLSearchParams(
       if (confirm("Do you really want to delete this event?")) {
         const options = { method: 'DELETE' }
         const response = await fetch(
-          `https://striveschool-api.herokuapp.com/api/product/${productId}`,
+          `https://striveschool-api.herokuapp.com/api/product/${product._id}`,
           options
         )
         if (response.ok) {
@@ -58,5 +63,5 @@ const params = new URLSearchParams(
   }
 
   function onEdit() {
-    window.location.assign(`backoffice.html/product/${productId}`)
+    window.location.assign(`backoffice.html/product/${product._id}`)
   }
